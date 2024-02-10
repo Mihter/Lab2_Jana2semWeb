@@ -1,17 +1,20 @@
-package com.example.demo.com.example.demo.service;
+package com.example.demo.service;
 
-import com.example.demo.com.example.demo.model.Post;
+import com.example.demo.model.Post;
 import org.springframework.stereotype.Service;
+import com.example.demo.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @Service
 public class PostService
 {
-    List<Post> posts;
+    /*List<Post> posts;
 
     {
         posts = new ArrayList<>();
@@ -21,15 +24,19 @@ public class PostService
         posts.add(post1);
         posts.add(post2);
         posts.add(post3);
-    }
+    }*/
 
-    public List<Post> listAllPosts()//возвращаю 3 поста из листа постов
+    @Autowired
+    PostRepository postRepository;
+
+    public List<Post> listAllPosts()
     {
-        return posts;
+        return StreamSupport.stream(postRepository.findAll().spliterator(), false).toList();
     }
 
     public void create(String text) //для создания нового поста
     {
-        posts.add(new Post((long)posts.size(), text, new Date()));
+        Post post = new Post(null, text, new Date());
+        postRepository.save(post);
     }
 }

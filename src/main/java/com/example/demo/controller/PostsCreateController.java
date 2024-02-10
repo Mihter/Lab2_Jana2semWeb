@@ -1,6 +1,6 @@
-package com.example.demo.com.example.demo.controller;
+package com.example.demo.controller;
 
-import com.example.demo.com.example.demo.service.PostService;
+import com.example.demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
